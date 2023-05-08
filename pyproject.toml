@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finevlm-probe"
+version = "0.0.1"
+description = "Lightweight probing harness for fine-grained visual-language alignment"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Ka Yiu Cheung" }]
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=2.1",
+    "transformers>=4.36,<4.45",
+    "Pillow>=10.0",
+    "numpy>=1.23",
+    "pyyaml>=6",
+    "datasets>=2.14",
+    "open_clip_torch>=2.23",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-xdist", "ruff>=0.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
