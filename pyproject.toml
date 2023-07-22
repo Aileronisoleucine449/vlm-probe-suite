@@ -30,3 +30,5 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+# ruff configured under [tool.ruff] above; line-length 100
