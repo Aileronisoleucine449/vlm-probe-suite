@@ -1,0 +1,14 @@
+# Main results sweep (reproduces Table 2 in the report).
+# 4 models * 2 probes * 1 dataset = 8 cells.
+models:
+  - clip_vit_b32
+  - clip_vit_b16
+  - clip_vit_l14
+  - siglip_base_224
+
+probes:
+  - attr-swap
+  - count-coarse
+
+datasets:
+  - coco-subset
