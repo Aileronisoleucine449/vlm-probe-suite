@@ -32,3 +32,13 @@ def test_attr_swap_summarize():
     assert abs(s["accuracy"] - 2/3) < 1e-6
 
 
+def test_count_coarse_bucket_summarize():
+    p = CountCoarseProbe()
+    recs = [
+        {"gold": "1", "pred": "1", "correct": 1},
+        {"gold": "3", "pred": "1", "correct": 0},
+        {"gold": "5+", "pred": "5+", "correct": 1},
+    ]
+    s = p.summarize(recs)
+    assert 0.0 <= s["macro_f1"] <= 1.0
+    assert s["accuracy"] == pytest.approx(2/3)
