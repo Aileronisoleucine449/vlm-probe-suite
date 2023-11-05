@@ -1,0 +1,16 @@
+{
+  "_note": "Truncated example. Real file has ~2000 entries; downloader populates it.",
+  "attr_swap_pairs": [
+    {"id": "asp_000001", "file_name": "000000397133.jpg",
+     "positive": "a red cube next to a blue ball",
+     "negative": "a blue cube next to a red ball"},
+    {"id": "asp_000002", "file_name": "000000037777.jpg",
+     "positive": "a yellow umbrella above a green chair",
+     "negative": "a green umbrella above a yellow chair"}
+  ],
+  "count_samples": [
+    {"id": "cnt_000001", "file_name": "000000252219.jpg", "object_class": "person", "count": 3},
+    {"id": "cnt_000002", "file_name": "000000087038.jpg", "object_class": "dog", "count": 1},
+    {"id": "cnt_000003", "file_name": "000000174482.jpg", "object_class": "car", "count": 6}
+  ]
+}
