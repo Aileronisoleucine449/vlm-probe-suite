@@ -44,3 +44,5 @@ class CocoSubset(Dataset):
                 object_class=a["object_class"],
                 count=int(a["count"]),
             )
+
+# Anns are derived from captions; not all COCO images have usable color+object patterns.
