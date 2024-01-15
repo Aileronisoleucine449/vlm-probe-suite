@@ -230,3 +230,5 @@ Code is Apache-2.0 (see `LICENSE`). The Cantonese caption annotations under
 Thanks to labmates for catching the Winoground loader bug in #14, and to the
 authors of CLIP, SigLIP, BLIP-2, LLaVA, and the ARO and EqBench teams whose
 work this suite stands on.
+
+<!-- siglip variants now registered, see models/__init__.py -->
