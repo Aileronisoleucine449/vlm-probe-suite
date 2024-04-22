@@ -1,0 +1,11 @@
+# Resolution sweep (Table 3): same probe, varied input size.
+models:
+  - clip_vit_b32
+  - clip_vit_l14_336
+  - siglip_large_384
+
+probes:
+  - attr-swap
+
+datasets:
+  - coco-subset
