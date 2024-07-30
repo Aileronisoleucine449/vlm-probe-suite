@@ -39,3 +39,6 @@ class LlavaAdapter(ModelAdapter):
             h = self.model.language_model(**ids, output_hidden_states=True).hidden_states[-1].mean(dim=1)
             outs.append(h)
         return torch.cat(outs, dim=0)
+
+# TODO: the text branch by-mean-of-hidden is not how LLaVA was trained.
+# results below are *indicative only*.
