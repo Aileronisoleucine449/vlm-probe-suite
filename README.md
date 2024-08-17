@@ -232,3 +232,5 @@ authors of CLIP, SigLIP, BLIP-2, LLaVA, and the ARO and EqBench teams whose
 work this suite stands on.
 
 <!-- siglip variants now registered, see models/__init__.py -->
+
+<!-- pass --max-samples 100 during development; full sweep is hours -->
