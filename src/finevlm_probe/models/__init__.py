@@ -38,3 +38,10 @@ def _init_builtins():
 
 
 _init_builtins()
+
+# blip2 registered manually below since the import is heavy
+try:
+    from .blip2_adapter import BLIP2Adapter  # noqa
+    register('blip2_itm_vit_g')(lambda **kw: BLIP2Adapter(**kw))
+except Exception:
+    pass
