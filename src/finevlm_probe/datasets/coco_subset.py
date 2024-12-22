@@ -46,3 +46,5 @@ class CocoSubset(Dataset):
             )
 
 # Anns are derived from captions; not all COCO images have usable color+object patterns.
+
+# we silently skip rather than raise; missing images are common when only a partial subset is downloaded
