@@ -10,3 +10,7 @@
 ## 0.3.0 - 2024-05
 - SigLIP family (base/large/so400m).
 - Sweep runner with round-robin GPU pinning.
+
+## 0.4.0 - 2024-11
+- LLaVA-1.5 adapter.
+- macro-F1 for count-coarse.
