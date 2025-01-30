@@ -63,3 +63,5 @@ def main(argv=None):
 
 if __name__ == "__main__":
     main()
+
+# if the caller already configured logging, basicConfig is a no-op (good)
