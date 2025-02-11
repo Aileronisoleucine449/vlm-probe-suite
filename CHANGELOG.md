@@ -14,3 +14,7 @@
 ## 0.4.0 - 2024-11
 - LLaVA-1.5 adapter.
 - macro-F1 for count-coarse.
+
+## 0.5.0 - 2025-02
+- BLIP-2 (frozen Q-Former).
+- Reporting: latex output.

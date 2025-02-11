@@ -3,4 +3,4 @@ from .models import get_model
 from .probes import get_probe
 
 __all__ = ["get_model", "get_probe"]
-__version__ = "0.4.0"
+__version__ = "0.5.0"
