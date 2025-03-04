@@ -48,3 +48,7 @@ class CocoSubset(Dataset):
 # Anns are derived from captions; not all COCO images have usable color+object patterns.
 
 # we silently skip rather than raise; missing images are common when only a partial subset is downloaded
+
+
+# note: winoground loader lives in a separate file (winoground.py)
+# the path-resolution bug was filed in #14 and fixed in 0.6.1
