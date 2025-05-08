@@ -12,3 +12,6 @@ def get_probe(name: str):
     if name not in _PROBES:
         raise KeyError(f"unknown probe: {name}. known: {sorted(_PROBES)}")
     return _PROBES[name]()
+
+from .cantonese_cap import CantoneseCapProbe  # noqa
+_PROBES[CantoneseCapProbe.name] = CantoneseCapProbe
