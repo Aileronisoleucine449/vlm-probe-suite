@@ -18,3 +18,7 @@
 ## 0.5.0 - 2025-02
 - BLIP-2 (frozen Q-Former).
 - Reporting: latex output.
+
+## 0.6.0 - 2025-06
+- Cantonese subset (300 imgs).
+- Resolution-sweep probe family.
