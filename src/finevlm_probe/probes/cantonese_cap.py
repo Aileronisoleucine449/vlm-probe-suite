@@ -27,3 +27,5 @@ class CantoneseCapProbe(Probe):
         if n == 0:
             return {"n": 0, "accuracy": float("nan")}
         return {"n": n, "accuracy": sum(r["correct"] for r in records) / n}
+
+# updated docstring; K was 4 from the start but earlier doc said 5
