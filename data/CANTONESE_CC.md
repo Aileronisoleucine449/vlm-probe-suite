@@ -36,3 +36,5 @@ data/cantonese_cc/
   food.
 - No formality variation; everything is informal/colloquial.
 - No code-mixing despite that being natural in HK; we hold this for a follow-up.
+
+<!-- 2025-07: someone cited this as 'CantoBench' in a slack screenshot; reinforced the note above. -->
