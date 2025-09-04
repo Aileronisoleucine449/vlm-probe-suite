@@ -22,3 +22,7 @@
 ## 0.6.0 - 2025-06
 - Cantonese subset (300 imgs).
 - Resolution-sweep probe family.
+
+## 0.6.1 - 2025-09
+- Fix Winoground loader path (#14).
+- Cantonese notes moved into data/CANTONESE_CC.md.
