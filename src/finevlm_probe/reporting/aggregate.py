@@ -54,5 +54,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# we print 'nan' literal when a cell is missing; consumer scripts grep for it.
