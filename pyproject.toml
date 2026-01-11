@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "finevlm-probe"
-version = "0.0.1"
+version = "0.6.2"
 description = "Lightweight probing harness for fine-grained visual-language alignment"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -30,5 +30,3 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py39"
-
-# ruff configured under [tool.ruff] above; line-length 100
