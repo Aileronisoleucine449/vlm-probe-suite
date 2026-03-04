@@ -25,3 +25,9 @@ See the README section *Adding a new model*. A few extra notes:
 
 We run `ruff` with the config in `pyproject.toml`. PRs should pass `ruff check .`
 and `pytest -q`. CI does this for you.
+
+## CI tip
+
+If your test imports `transformers` at the top level, please guard it -- our CI
+runner doesn't have GPU model weights and the slow import drags the build past
+the 10-minute mark.
